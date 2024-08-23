@@ -2,6 +2,7 @@
 services:
   fluent:
     image: linito2711/fluent
+    platform: linux/arm64
     ports:
       - "24224:24224"
     restart: always
@@ -11,6 +12,7 @@ services:
       retries: 1
 
   minio:
+    platform: linux/arm64
     image: linito2711/minio
     ports:
       - "9000:9000"
@@ -28,7 +30,7 @@ services:
     restart: always
     volumes:
       - minio:/app/data
-
+    platform: linux/arm64
 
   Watchtower:
     image: containrrr/watchtower  # The image to use
@@ -37,9 +39,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock  # Bind mount the Docker socket
     command: --interval 15  # Set the interval for checking updates (in seconds)
     restart: always
+    platform: linux/arm64
+
 
   delta-rs-data_fds:
     image: linito2711/delta-rs-data_fds:latest
+    platform: linux/arm64
     depends_on:
       - fluent
     command: sh -c "python main.py config_mqtt"
