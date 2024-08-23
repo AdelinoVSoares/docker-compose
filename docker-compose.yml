@@ -16,11 +16,19 @@ services:
       - "9000:9000"
       - "9001:9001"
     restart: always
+    volumes:
+      - minio:/data
+    command: server /data --console-address ":9001"
+
+
   localwebsite:
     image: linito2711/localwebsite
     ports:
       - "9002:9002"
     restart: always
+    volumes:
+      - minio:/app/data
+
 
   Watchtower:
     image: containrrr/watchtower  # The image to use
@@ -28,7 +36,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # Bind mount the Docker socket
     command: --interval 15  # Set the interval for checking updates (in seconds)
-    restart: unless-stopped
+    restart: always
 
   delta-rs-data_fds:
     image: linito2711/delta-rs-data_fds:latest
@@ -37,13 +45,14 @@ services:
     command: sh -c "python main.py config_mqtt"
     restart: always
     volumes:
-      - meuvolume:/app/data
+      - outputtable:/app/data
     logging:
       driver: fluentd  # Specify the log driver
       options:
         fluentd-address: localhost:24224  # Address of the Fluentd instance
         tag: "docker.{{.Name}}"
 volumes:
-  meuvolume:  # Define the volume
-    external: true  # Specify that it's an external volume
-
+  outputtable:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
+  minio:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
