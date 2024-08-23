@@ -1,0 +1,49 @@
+
+services:
+  fluent:
+    image: linito2711/fluent
+    ports:
+      - "24224:24224"
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:24224"]
+      timeout: 5s
+      retries: 1
+
+  minio:
+    image: linito2711/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    restart: always
+  localwebsite:
+    image: linito2711/localwebsite
+    ports:
+      - "9002:9002"
+    restart: always
+
+  Watchtower:
+    image: containrrr/watchtower  # The image to use
+    container_name: watchtower    # The name of the container
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Bind mount the Docker socket
+    command: --interval 15  # Set the interval for checking updates (in seconds)
+    restart: unless-stopped
+
+  delta-rs-data_fds:
+    image: linito2711/delta-rs-data_fds:latest
+    depends_on:
+      - fluent
+    command: sh -c "python main.py config_mqtt"
+    restart: always
+    volumes:
+      - meuvolume:/app/data
+    logging:
+      driver: fluentd  # Specify the log driver
+      options:
+        fluentd-address: localhost:24224  # Address of the Fluentd instance
+        tag: "docker.{{.Name}}"
+volumes:
+  meuvolume:  # Define the volume
+    external: true  # Specify that it's an external volume
+
