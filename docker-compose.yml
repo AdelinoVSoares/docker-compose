@@ -5,6 +5,12 @@ services:
     container_name: fluentbit
     ports:
       - "24224:24224"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
     volumes:
       - ./azure_fluent.conf:/fluent-bit/etc/fluent-bit.conf
       - ./parsers.conf:/fluent-bit/etc/parsers.conf
