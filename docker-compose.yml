@@ -15,7 +15,7 @@ services:
       - ./azure_fluent.conf:/fluent-bit/etc/fluent-bit.conf
       - ./parsers.conf:/fluent-bit/etc/parsers.conf
     environment:
-    - JEMALLOC_SYS_WITH_LG_PAGE=16
+    - LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libc.so.6
 
   minio:
     platform: linux/arm64
