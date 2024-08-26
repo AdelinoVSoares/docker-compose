@@ -9,7 +9,7 @@ services:
       - ./azure_fluent.conf:/fluent-bit/etc/fluent-bit.conf
       - ./parsers.conf:/fluent-bit/etc/parsers.conf
     environment:
-    - FLB_LOG_LEVEL=warn
+    - MALLOC_ARENA_MAX=1
 
   minio:
     platform: linux/arm64
