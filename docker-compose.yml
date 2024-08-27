@@ -12,7 +12,7 @@ services:
       retries: 1
     
     environment:
-      - DISABLE_JEMALLOC=true
+      DISABLE_JEMALLOC: true
 
   minio:
     platform: linux/arm64
