@@ -1,15 +1,21 @@
 
 services:
-  fluent:
-    image: linito2711/ffluentdarm64
-    platform: linux/arm64
+  fluentbit:
+    image: fluent/fluent-bit:3.1.6-arm64
+    container_name: fluentbit
     ports:
       - "24224:24224"
-    restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:24224"]
-      timeout: 5s
-      retries: 1
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    volumes:
+      - ./azure_fluent.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./parsers.conf:/fluent-bit/etc/parsers.conf
+    environment:
+    #- LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libc.so.6
 
   minio:
     platform: linux/arm64
@@ -51,7 +57,7 @@ services:
     image: linito2711/delta-rs-data_fds:latest
     platform: linux/arm64
     depends_on:
-      - fluent
+      - fluentbit
     command: sh -c "python main.py config_mqtt"
     restart: always
     volumes:
