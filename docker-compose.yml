@@ -13,7 +13,8 @@ services:
     
     environment:
       - LD_PRELOAD=/usr/lib/libjemalloc.so.2
-      - MALLOC_CONF=stats_print:true
+      - MALLOC_CONF="narenas:1"
+
 
   minio:
     platform: linux/arm64
