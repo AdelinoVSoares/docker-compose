@@ -43,7 +43,7 @@ services:
     platform: linux/arm64
     depends_on:
       - fluent
-    command: sh -c "python main.py config_mqtt"
+    command: sh -c "cron -f & python main.py config_mqtt"
     restart: always
     volumes:
       - outputtable:/app/data
