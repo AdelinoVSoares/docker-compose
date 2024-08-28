@@ -27,11 +27,6 @@ services:
     volumes:
       - minio:/app/data
     platform: linux/arm64
-    logging:
-      driver: fluentd  # Specify the log driver
-      options:
-        fluentd-address: localhost:24224  # Address of the Fluentd instance
-        tag: "docker.{{.Name}}"
 
   Watchtower:
     image: containrrr/watchtower  # The image to use
