@@ -1,7 +1,7 @@
 
 services:
   fluent:
-    image: linito2711/ffluentdarm64
+    image: linito2711/ffluentarm64
     platform: linux/arm64
     ports:
       - "24224:24224"
