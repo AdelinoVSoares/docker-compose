@@ -1,6 +1,7 @@
 
 services:
   fluent:
+    container_name: fluent
     image: linito2711/ffluentarm64
     platform: linux/arm64
     ports:
@@ -8,6 +9,7 @@ services:
     restart: always
 
   minio:
+    container_name: minio
     platform: linux/arm64
     image: linito2711/minio
     ports:
@@ -21,6 +23,7 @@ services:
 
   localwebsite:
     image: linito2711/localwebsite
+    container_name: localwebsite
     ports:
       - "9002:9002"
     restart: always
@@ -39,6 +42,7 @@ services:
 
 
   delta-rs-data_fds:
+    container_name: fds
     image: linito2711/delta-rs-data_fds:latest
     platform: linux/arm64
     depends_on:
