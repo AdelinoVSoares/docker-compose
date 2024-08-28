@@ -6,13 +6,6 @@ services:
     ports:
       - "24224:24224"
     restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:24224"]
-      timeout: 5s
-      retries: 1
-    
-    environment:
-      DISABLE_JEMALLOC: true
 
   minio:
     platform: linux/arm64
