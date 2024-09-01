@@ -50,7 +50,7 @@ services:
     command: sh -c "cron -f & python main.py config_mqtt"
     restart: always
     volumes:
-      - outputtable:/app/data
+      - outputtable:/app/src/output_locally_tables
     logging:
       driver: fluentd  # Specify the log driver
       options:
