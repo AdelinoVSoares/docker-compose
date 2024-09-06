@@ -2,7 +2,7 @@
 services:
   fluent:
     container_name: fluent
-    image: linito2711/fluent
+    image: linito2711/fluent:latest
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
       interval: 30s
@@ -17,7 +17,7 @@ services:
   minio:
     container_name: minio
     platform: linux/arm64
-    image: linito2711/minio
+    image: linito2711/minio:latest
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -28,14 +28,15 @@ services:
 
 
   localwebsite:
-    image: linito2711/nodejs
+    image: linito2711/localwebsite:latest
     container_name: localwebsite
     ports:
       - "3000:3000"
     restart: always
     volumes:
-      - minio:/app/data
-      - outputtable:/app/data
+      - minio:/app/data/minio
+      - outputtable:/app/data/tables
+      - hwmetrics:/app/data/metrics
     platform: linux/arm64
 
   Watchtower:
