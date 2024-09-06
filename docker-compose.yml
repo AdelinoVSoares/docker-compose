@@ -2,7 +2,13 @@
 services:
   fluent:
     container_name: fluent
-    image: linito2711/ffluentarm64
+    image: linito2711/fluent
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
     platform: linux/arm64
     ports:
       - "24224:24224"
@@ -22,13 +28,14 @@ services:
 
 
   localwebsite:
-    image: linito2711/localwebsite
+    image: linito2711/nodejs
     container_name: localwebsite
     ports:
-      - "9002:9002"
+      - "3000:3000"
     restart: always
     volumes:
       - minio:/app/data
+      - outputtable:/app/data
     platform: linux/arm64
 
   Watchtower:
@@ -46,11 +53,13 @@ services:
     image: linito2711/delta-rs-data_fds:latest
     platform: linux/arm64
     depends_on:
-      - fluent
+      fluent:
+        condition: service_healthy
     command: sh -c "cron -f & python main.py config_mqtt"
     restart: always
     volumes:
       - outputtable:/app/src/output_locally_tables
+      - hwmetrics:/app/src/metrics
     logging:
       driver: fluentd  # Specify the log driver
       options:
@@ -58,6 +67,8 @@ services:
         tag: "docker.{{.Name}}"
 volumes:
   outputtable:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
+  hwmetrics:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
   minio:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
