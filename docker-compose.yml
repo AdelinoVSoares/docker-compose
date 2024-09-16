@@ -17,7 +17,7 @@ services:
   minio:
     container_name: minio
     platform: linux/arm64
-    image: minioteste
+    image: linito2711/minio
     ports:
       - "9000:9000"
       - "9001:9001"
