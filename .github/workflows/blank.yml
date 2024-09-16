@@ -28,17 +28,14 @@ jobs:
       # Runs a single command using the runners shell
       - name: Updating repo files
         run: |
-            cd /home/lino-rpi/docker-compose
-            sudo git pull https://github.com/AdelinoVSoares/docker-compose.git
+            cd /home/root/docker-compose && sudo git pull https://github.com/AdelinoVSoares/docker-compose.git
         
       - name: Shuting down all containers
         run: sudo docker-compose down
 
       - name: Updating all images and running containers
         run: |
-            cd /home/lino-rpi/docker-compose
+            cd /home/root/docker-compose
             sudo docker-compose pull
-            sudo docker-compose up -d fluent
-            sleep 5
             sudo docker-compose up -d
         
