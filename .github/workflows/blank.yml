@@ -10,14 +10,16 @@ on:
   pull_request:
     branches: [ "main" ]
 
- 
 jobs:
   
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: self-hosted
-    
+    environment:
+      docker-compose_file:"docker-compose.webfds.yml"
+      #docker-compose_file:"docker-compose.localfds.yml"
+      #docker-compose_file:"docker-compose.server.yml"
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       
@@ -31,11 +33,12 @@ jobs:
             cd /home/root/docker-compose && sudo git pull https://github.com/AdelinoVSoares/docker-compose.git
         
       - name: Shuting down all containers
-        run: sudo docker-compose down
+        run: sudo docker-compose down -f $docker-compose_file
+
 
       - name: Updating all images and running containers
         run: |
             cd /home/root/docker-compose
-            sudo docker-compose -f docker-compose.webfds.yml pull
-            sudo docker-compose -f docker-compose.webfds.yml up -d
+            sudo docker-compose -f $docker-compose_file pull
+            sudo docker-compose -f $docker-compose_file up -d
         
