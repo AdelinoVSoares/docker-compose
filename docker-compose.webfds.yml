@@ -21,7 +21,6 @@ services:
       - "9002:9002"
     restart: always
     volumes:
-      - minio:/app/data/minio
       - outputtable:/app/data/tables
       - hwmetrics:/app/data/metrics
     platform: linux/arm64
