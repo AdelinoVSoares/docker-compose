@@ -17,7 +17,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
     environment:
-      docker-compose_file:"docker-compose.webfds.yml"
+      docker_compose_file:"docker-compose.webfds.yml"
       #docker-compose_file:"docker-compose.localfds.yml"
       #docker-compose_file:"docker-compose.server.yml"
     # Steps represent a sequence of tasks that will be executed as part of the job
