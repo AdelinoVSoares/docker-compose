@@ -2,7 +2,7 @@
 services:
   fluent:
     container_name: fluent
-    image: linito2711/fluent:latest
+    image: linito2711/fluentazure:latest
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
       interval: 30s
@@ -13,20 +13,6 @@ services:
     ports:
       - "24224:24224"
     restart: always
-
-  minio:
-    container_name: minio
-    platform: linux/arm64
-    image: minioteste
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    restart: always
-    volumes:
-      - minio:/data
-      
-    #command: server /data --console-address ":9001"
-
 
   localwebsite:
     image: linito2711/localwebsite:latest
@@ -72,8 +58,6 @@ volumes:
   outputtable:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
   hwmetrics:  # Define the volume
-    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
-  minio:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
   configs:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume

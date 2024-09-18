@@ -36,6 +36,6 @@ jobs:
       - name: Updating all images and running containers
         run: |
             cd /home/root/docker-compose
-            sudo docker-compose pull
-            sudo docker-compose up -d
+            sudo docker-compose -f docker-compose.webfds.yml pull
+            sudo docker-compose -f docker-compose.webfds.yml up -d
         

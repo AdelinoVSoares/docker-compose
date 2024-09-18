@@ -1,0 +1,52 @@
+
+services:
+  fluent:
+    container_name: fluent
+    image: linito2711/fluentminio:latest
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    platform: linux/arm64
+    ports:
+      - "24224:24224"
+    restart: always
+      
+
+  Watchtower:
+    image: containrrr/watchtower  # The image to use
+    container_name: watchtower    # The name of the container
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Bind mount the Docker socket
+    command: --interval 15  # Set the interval for checking updates (in seconds)
+    restart: always
+    platform: linux/arm64
+
+
+  fds:
+    container_name: fds
+    image: linito2711/delta-rs-data_fds:latest
+    platform: linux/arm64
+    depends_on:
+      fluent:
+        condition: service_healthy
+    command: sh -c "python fluentconf.py & cron -f & python main.py config_mqtt"
+    restart: always
+    volumes:
+      - outputtable:/app/src/output_locally_tables
+      - hwmetrics:/app/src/metrics
+      - configs:/app/src/configs
+    logging:
+      driver: fluentd  # Specify the log driver
+      options:
+        fluentd-address: localhost:24224  # Address of the Fluentd instance
+        tag: "docker.{{.Name}}"
+volumes:
+  outputtable:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
+  hwmetrics:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
+  configs:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume

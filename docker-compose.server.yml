@@ -1,0 +1,40 @@
+
+services:
+  minio:
+    container_name: minio
+    platform: linux/arm64
+    image: minioteste
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    restart: always
+    volumes:
+      - minio:/data
+      
+    #command: server /data --console-address ":9001"
+
+  localwebsite:
+    image: linito2711/localwebsite:latest
+    container_name: localwebsite
+    ports:
+      - "9002:9002"
+    restart: always
+    volumes:
+      - minio:/app/data/minio
+      - outputtable:/app/data/tables
+      - hwmetrics:/app/data/metrics
+    platform: linux/arm64
+
+  Watchtower:
+    image: containrrr/watchtower  # The image to use
+    container_name: watchtower    # The name of the container
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Bind mount the Docker socket
+    command: --interval 15  # Set the interval for checking updates (in seconds)
+    restart: always
+    platform: linux/arm64
+
+
+volumes:
+  minio:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
