@@ -34,7 +34,9 @@ jobs:
             sudo git pull https://github.com/AdelinoVSoares/docker-compose.git
         
       - name: Shuting down all containers
-        run: sudo docker-compose -f $docker-compose_file down
+        run: |
+             cd /home/root/docker-compose |
+             sudo docker-compose -f $docker-compose_file down
 
 
       - name: Updating all images and running containers
