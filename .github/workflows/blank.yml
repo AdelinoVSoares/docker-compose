@@ -36,12 +36,12 @@ jobs:
       - name: Shuting down all containers
         run: |
              cd /home/root/docker-compose
-             sudo docker-compose -f $docker-compose_file down
+             sudo docker-compose -f $docker_compose_file down
 
 
       - name: Updating all images and running containers
         run: |
             cd /home/root/docker-compose
-            sudo docker-compose -f $docker-compose_file pull
-            sudo docker-compose -f $docker-compose_file up -d
+            sudo docker-compose -f $docker_compose_file pull
+            sudo docker-compose -f $docker_compose_file up -d
         
