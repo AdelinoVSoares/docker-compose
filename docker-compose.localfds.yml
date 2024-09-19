@@ -32,8 +32,9 @@ services:
     depends_on:
       fluent:
         condition: service_healthy
-    command: sh -c "python fluentconf.py & cron -f & python main.py config_mqtt"
+    command: sh -c "cron -f & python main.py config_mqtt"
     restart: always
+    hostname: ${HOSTNAME}
     volumes:
       - outputtable:/app/src/output_locally_tables
       - hwmetrics:/app/src/metrics
