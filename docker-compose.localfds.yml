@@ -33,7 +33,7 @@ services:
     depends_on:
       fluent:
         condition: service_healthy
-    command: sh -c "cron -f & python main.py config_mqtt"
+    command: sh -c "python fluentconfig.py & cron -f & python main.py config_mqtt"
     restart: always
     hostname: ${HOSTNAME}
     volumes:
