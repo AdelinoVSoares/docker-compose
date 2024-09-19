@@ -3,6 +3,7 @@ services:
   fluent:
     container_name: fluent
     image: linito2711/fluentazure:latest
+    hostname: $HOSTNAME
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
       interval: 30s
@@ -18,6 +19,7 @@ services:
     image: linito2711/localwebsite:latest
     container_name: localwebsite
     ports:
+    hostname: $HOSTNAME
       - "9002:9002"
     restart: always
     volumes:
