@@ -2,7 +2,7 @@
 services:
   fluent:
     container_name: fluent
-    image: linito2711/fluent:latest
+    image: linito2711/fluentazure:latest
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
       interval: 30s

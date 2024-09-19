@@ -38,3 +38,7 @@ services:
 volumes:
   minio:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
+  outputtable:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
+  hwmetrics:  # Define the volume
+    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
