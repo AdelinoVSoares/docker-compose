@@ -18,8 +18,8 @@ services:
   localwebsite:
     image: linito2711/localwebsite:latest
     container_name: localwebsite
-    ports:
     hostname: $HOSTNAME
+    ports:
       - "9002:9002"
     restart: always
     volumes:
