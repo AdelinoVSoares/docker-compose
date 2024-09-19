@@ -44,7 +44,7 @@ services:
         condition: service_healthy
     command: sh -c "cron -f & python main.py config_mqtt"
     restart: always
-    hostname: ${HOSTNAME}
+    hostname: $HOSTNAME
     volumes:
       - outputtable:/app/src/output_locally_tables
       - hwmetrics:/app/src/metrics
