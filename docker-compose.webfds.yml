@@ -11,8 +11,6 @@ services:
       retries: 5
       start_period: 5s
     platform: linux/arm64
-    volumes:
-      - vfluent:/fluentd/etc
     ports:
       - "24224:24224"
     restart: always
