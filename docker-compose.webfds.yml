@@ -44,7 +44,7 @@ services:
     depends_on:
       fluent:
         condition: service_healthy
-    command: sh -c "cron -f & python main.py config_mqtt"
+    command: sh -c "cron -f & python main.py config_mqtt & python main.py config2_mqtt"
     restart: always
     hostname: $HOSTNAME
     volumes:
