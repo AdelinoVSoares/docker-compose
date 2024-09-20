@@ -3,7 +3,7 @@ services:
   minio:
     container_name: minio
     platform: linux/arm64
-    image: minioteste
+    image: linito2711/minio:latest
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -11,8 +11,8 @@ services:
     volumes:
       - minio:/data
       
-    #command: server /data --console-address ":9001"
-
+    command: sh -c "cron -f & python app/rcconfig.py ; minio server /data --console-address :9001"
+ 
   localwebsite:
     image: linito2711/localwebsite:latest
     container_name: localwebsite

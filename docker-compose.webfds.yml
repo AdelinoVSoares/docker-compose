@@ -2,7 +2,7 @@
 services:
   fluent:
     container_name: fluent
-    image: linito2711/fluentazure:latest
+    image: linito2711/fluent:latest
     hostname: $HOSTNAME
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
@@ -46,14 +46,13 @@ services:
     depends_on:
       fluent:
         condition: service_healthy
-    command: sh -c "python fluentconfigAzure.py & cron -f & python main.py config_mqtt"
+    command: sh -c "cron -f & python main.py config_mqtt"
     restart: always
     hostname: $HOSTNAME
     volumes:
       - outputtable:/app/src/output_locally_tables
       - hwmetrics:/app/src/metrics
       - configs:/app/src/configs
-      - vfluent:/app/fluent
     logging:
       driver: fluentd  # Specify the log driver
       options:
