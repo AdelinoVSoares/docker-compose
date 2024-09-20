@@ -39,7 +39,6 @@ services:
     volumes:
       - outputtable:/app/src/output_locally_tables
       - hwmetrics:/app/src/metrics
-      - configs:/app/src/configs
     logging:
       driver: fluentd  # Specify the log driver
       options:
@@ -49,6 +48,4 @@ volumes:
   outputtable:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
   hwmetrics:  # Define the volume
-    external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
-  configs:  # Define the volume
     external: false  # Specify that it's an external volumemeuvolume:  # Define the volume
