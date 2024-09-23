@@ -2,7 +2,7 @@
 services:
   fluent:
     container_name: fluent
-    image: linito2711/fluent:0.0.86
+    image: linito2711/fluent:latest
     hostname: $HOSTNAME
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
@@ -39,7 +39,7 @@ services:
 
   fds:
     container_name: fds
-    image: linito2711/delta-rs-data_fds:latest
+    image: linito2711/delta-rs-data_fds:0.0.86
     platform: linux/arm64
     depends_on:
       fluent:
