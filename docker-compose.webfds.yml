@@ -39,7 +39,7 @@ services:
 
   fds:
     container_name: fds
-    image: linito2711/delta-rs-data_fds:0.0.86
+    image: linito2711/delta-rs-data_fds:latest
     platform: linux/arm64
     depends_on:
       fluent:
