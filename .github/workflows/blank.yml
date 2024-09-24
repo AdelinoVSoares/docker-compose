@@ -17,6 +17,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
     
+    env:
+      docker_compose_file: "docker-compose.webfds.yml"
       #docker-compose_file:"docker-compose.localfds.yml"
       #docker-compose_file:"docker-compose.server.yml"
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -27,16 +29,19 @@ jobs:
       - uses: actions/checkout@v4
 
       # Runs a single command using the runners shell
-        
-      - name: Logs
+      - name: Updating repo files
         run: |
-            cd ..
-            cd /home/valgode
-            curl http://192.168.68.55/status
+            cd /home/root/docker-compose
+            sudo git pull https://github.com/AdelinoVSoares/docker-compose.git
+        
+      - name: Shuting down all containers
+        run: |
+             cd /home/root/docker-compose
+             sudo docker-compose -f $docker_compose_file down
 
 
-
-
-
-
-
+      - name: Updating all images and running containers
+        run: |
+            cd /home/root/docker-compose
+            sudo docker-compose -f $docker_compose_file pull
+            HOSTNAME=$(hostname) sudo HOSTNAME=$(hostname) docker-compose -f $docker_compose_file up -d
