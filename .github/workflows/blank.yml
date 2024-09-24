@@ -32,7 +32,8 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            dbus-launch --sh-syntax --exit-with-session
+            journalctl -xe
+
 
 
 
