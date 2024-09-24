@@ -32,4 +32,5 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            sudo apt install --only-upgrade rpi-connect-lite
+            systemctl --user status rpi-connect
+            systemctl --user restart rpi-connect
