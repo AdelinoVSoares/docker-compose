@@ -32,9 +32,4 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            cat cronjob2.log
-            echo "0000000000000000000000"
-            cd ..
-            cd /home
-            cat rc_local.log
-            echo "0000000000000000000000"
+            sudo apt install --only-upgrade rpi-connect-lite
