@@ -32,5 +32,7 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            loginctl show-user valgode --property=State
+            sudo loginctl enable-linger valgode
+            systemctl --user daemon-reexec
+
 
