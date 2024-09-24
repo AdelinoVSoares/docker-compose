@@ -32,7 +32,7 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            sudo loginctl enable-linger valgode
-            systemctl --user daemon-reexec
+            dbus-launch --sh-syntax --exit-with-session
+
 
 
