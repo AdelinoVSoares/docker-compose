@@ -32,7 +32,8 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            cat /etc/hostname
+            sudo systemctl restart systemd-logind
+
 
 
 
