@@ -32,8 +32,15 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            
-            cat /home/valgode/logs.log
+            sudo apt install rpi-connect-lite
+
+            loginctl enable-linger
+
+            systemctl --user start rpi-connect
+
+            sleep 2
+
+            rpi-connect signin
 
 
 
