@@ -32,7 +32,8 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            sudo reboot
+            rpi-connect signin >> /home/valgode/logs.log 2>&1
+            cat /home/valgode/logs.log
 
 
 
