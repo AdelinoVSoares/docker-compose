@@ -32,16 +32,8 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
+            sudo apt remove --purge rpi-connect-lite
             sudo apt install rpi-connect-lite
-
-            loginctl enable-linger
-
-            systemctl --user start rpi-connect
-
-            sleep 2
-
-            rpi-connect signin
-
 
 
 
