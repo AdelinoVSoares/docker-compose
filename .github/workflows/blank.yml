@@ -32,7 +32,7 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            systemctl list-units --type=service | grep connect
+            sudo reboot
 
 
 
