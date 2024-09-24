@@ -44,4 +44,4 @@ jobs:
         run: |
             cd /home/root/docker-compose
             sudo docker-compose -f $docker_compose_file pull
-            HOSTNAME=$(hostname) sudo HOSTNAME=$(hostname) docker-compose -f $docker_compose_file up -d
+            HOSTNAME=$(hostname) sudo docker-compose -f $docker_compose_file up -d
