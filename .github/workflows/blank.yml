@@ -32,5 +32,5 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            systemctl --user status rpi-connect
-            systemctl --user restart rpi-connect
+            sudo systemctl --user status rpi-connect
+            sudo systemctl --user restart rpi-connect
