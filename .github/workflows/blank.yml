@@ -32,8 +32,7 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            ping 192.168.68.55
-            curl 192.168.68.55/status
+            curl http://192.168.68.55/status
 
 
 
