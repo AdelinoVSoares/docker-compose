@@ -32,5 +32,5 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            loginctl show-user $USER --property=State
+            loginctl show-user valgode --property=State
 
