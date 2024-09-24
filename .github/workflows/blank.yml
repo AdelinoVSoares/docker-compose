@@ -32,8 +32,8 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            sudo apt remove --purge rpi-connect-lite
-            sudo apt install rpi-connect-lite
+            sudo apt remove --purge -y rpi-connect-lite
+            sudo apt install -y rpi-connect-lite
 
 
 
