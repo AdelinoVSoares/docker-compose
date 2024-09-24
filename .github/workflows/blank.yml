@@ -17,8 +17,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
     
-    env:
-      docker_compose_file: "docker-compose.webfds.yml"
       #docker-compose_file:"docker-compose.localfds.yml"
       #docker-compose_file:"docker-compose.server.yml"
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -30,9 +28,9 @@ jobs:
 
       # Runs a single command using the runners shell
         
-      - name: Shuting down all containers
+      - name: Logs
         run: |
-            cd..
+            cd ..
             cd /home/valgode
             cat cronjob2.log
             echo "0000000000000000000000"
