@@ -32,7 +32,6 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            loginctl enable-linger valgode
             systemctl --user start rpi-connect
 
 
