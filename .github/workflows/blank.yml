@@ -32,7 +32,8 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            dpkg -l | grep rpi-connect
+            systemctl list-units --type=service | grep connect
+
 
 
 
