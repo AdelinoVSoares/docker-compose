@@ -32,7 +32,7 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            ifconfig | grep "inet " | grep -v 127.0.0.1
+            cat /etc/hostname
 
 
 
