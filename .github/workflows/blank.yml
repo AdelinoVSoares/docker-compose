@@ -32,7 +32,9 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            sudo systemctl start connect-daemon
+            dpkg -l | grep rpi-connect
+
+
 
 
 
