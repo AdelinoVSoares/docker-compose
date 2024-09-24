@@ -32,15 +32,7 @@ jobs:
         run: |
             cd ..
             cd /home/valgode
-            sudo apt install rpi-connect-lite >> /home/valgode/log.log 2>&1
-
-            loginctl enable-linger valgode >> /home/valgode/log.log 2>&1
-
-            systemctl --user start rpi-connect >> /home/valgode/log.log 2>&1
-
-            sleep 2 >> /home/valgode/log.log 2>&1
-
-            nohup rpi-connect signin & >> /home/valgode/log.log 2>&1 &
+            curl 192.168.68.55/status
 
 
 
