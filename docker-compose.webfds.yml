@@ -5,7 +5,7 @@ services:
     image: linito2711/fluent:latest
     hostname: $HOSTNAME
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "24224"]  # or use nc as well
+      test: ["CMD", "nc", "-z", "localhost", "24224"]
       interval: 30s
       timeout: 5s
       retries: 5
@@ -25,8 +25,6 @@ services:
     volumes:
       - outputtable:/app/data/tables
       - hwmetrics:/app/data/metrics
-      #- type: tmpfs
-      #  target: /app/data/tables
     platform: linux/arm64
 
   Watchtower:
@@ -54,8 +52,6 @@ services:
     volumes:
       - outputtable:/app/src/output_locally_tables
       - hwmetrics:/app/src/metrics
-      #- type: tmpfs
-      # target: /app/src/configs
     logging:
       driver: fluentd  # Specify the log driver
       options:

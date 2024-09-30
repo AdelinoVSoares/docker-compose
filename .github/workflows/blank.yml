@@ -31,17 +31,19 @@ jobs:
       # Runs a single command using the runners shell
       - name: Updating repo files
         run: |
-            cd /home/root/docker-compose
+            cd /home/$(whoami)/docker-compose
             sudo git pull https://github.com/AdelinoVSoares/docker-compose.git
+            echo $(whoami)
+            echo $RPI_USER
         
       - name: Shuting down all containers
         run: |
-             cd /home/root/docker-compose
+             cd /home/$RPI_USER/docker-compose
              sudo docker-compose -f $docker_compose_file down
 
 
       - name: Updating all images and running containers
         run: |
-            cd /home/root/docker-compose
+            cd /home/$RPI_USER/docker-compose
             sudo docker-compose -f $docker_compose_file pull
             HOSTNAME=$(hostname) sudo docker-compose -f $docker_compose_file up -d
