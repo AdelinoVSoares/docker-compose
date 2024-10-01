@@ -15,9 +15,8 @@ services:
       retries: 5
       start_period: 5s
     volumes:
-      - minio:/data
-      
-    command: sh -c "cron -f & python app/rcconfig.py ; minio server /data --address :9000 --console-address :9001"
+      - minio:/data/tables
+    command: sh -c "cron -f & python app/rcconfig.py ; minio server /data/tables --address :9000 --console-address :9001"
  
   localwebsite:
     image: linito2711/localwebsite:latest
