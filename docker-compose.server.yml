@@ -28,7 +28,7 @@ services:
       minio:
         condition: service_healthy
     volumes:
-      - minio:/app/data/tables
+      - minio:/app/data/minio
     platform: linux/arm64
 
   Watchtower:
